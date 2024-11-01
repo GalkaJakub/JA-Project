@@ -1,0 +1,20 @@
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\bin\x64\Debug\JaProj.exe.config
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\bin\x64\Debug\JaProj.exe
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\bin\x64\Debug\JaProj.pdb
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.csproj.AssemblyReference.cache
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.Properties.Resources.resources
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.csproj.GenerateResource.cache
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.csproj.CoreCompileInputs.cache
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.exe
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.pdb
+C:\Users\jakub\Desktop\semestr 5\JA projekt\JaProj\JaProj\obj\x64\Debug\JaProj.Form1.resources
+C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Debug\JaProj.exe.config
+C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Debug\JaProj.exe
+C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Debug\JaProj.pdb
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.csproj.AssemblyReference.cache
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.Form1.resources
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.Properties.Resources.resources
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.csproj.GenerateResource.cache
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.csproj.CoreCompileInputs.cache
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.exe
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Debug\JaProj.pdb
