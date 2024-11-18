@@ -1,0 +1,148 @@
+﻿// Version 0.2
+
+// Update:
+//Better code organization
+//Added selection of number of threads
+//Added detects and defaults the number of threads
+//Added selection of active lib (C++ or ASM)
+//Added prototype of c++ function for image sharpening (requires improvements and multi-threading)
+
+using JaProj.Processing;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace JaProj
+{
+    //The `Form1` class represents the main window of the application.
+    public partial class Form1 : Form
+    {
+
+        // Numer of Threads
+        private int threadCount;
+        // Threads to choice
+        int[] threadOptions = { 1, 2, 4, 8, 16, 32, 64 };
+        // Bitmap to store the currently loaded image
+        private Bitmap currentBitmap;
+        //
+        private string activeLib;
+        // Constructor for the form, initializes the components
+        public Form1()
+        {
+            InitializeComponent();
+            threadCount = Environment.ProcessorCount;
+            threadsLabel.Text = $"Threads: {threadCount}";
+            int defaultIndex = Array.IndexOf(threadOptions, threadCount);
+            threadsBar.Value = defaultIndex;
+        }
+
+        //"Load Image" button click event.
+        //Opens a file dialog for the user to select an image.
+        //If a valid image is selected, it loads and displays it in pictureBoxO.
+        private void btnLoadImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Images (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
+                openFileDialog.Title = "Select an Image";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Load the selected image
+                        string filePath = openFileDialog.FileName;
+                        currentBitmap = new Bitmap(filePath);
+                        pictureBoxO.Image = currentBitmap;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Display an error message
+                        MessageBox.Show("Loading image error: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        // Button click event.
+        // Checks if an image is loaded, then calculates and displays the histograms for Red, Green, Blue, and Luma channels.
+        private void btnProces_Click(object sender, EventArgs e)
+        {
+            if (currentBitmap != null)
+            {
+                Histogram histogram = new Histogram(currentBitmap);
+                histogram.printHis(pictureBoxRed, "r");
+                histogram.printHis(pictureBoxGreen, "g");
+                histogram.printHis(pictureBoxBlue, "b");
+                histogram.printHis(pictureBoxLuma, "l");
+            }
+            else
+            {
+                // Display an error message
+                MessageBox.Show("Load the image first.");
+            }
+        }
+
+        // Button click event.
+        // Checks if an image is loaded, then sharpen image using c++ lib
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (currentBitmap != null)
+            {
+                if (activeLib == "CPP")
+                {
+                    {
+                        CppSharpening processor = new CppSharpening();
+                        processor.sharpenByCpp(currentBitmap, pictureBox1, threadCount);
+                    }
+                }
+                else if (activeLib == "ASM")
+                {
+                    //code for ASM lib
+                }
+                else
+                {
+                    MessageBox.Show("Select ASM or C++");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Load the image first.");
+            }
+        }
+
+        // Track ValueChanged Bar event.
+        // Sets the number of threads
+        private void threadsBar_ValueChanged(object sender, EventArgs e)
+        {
+            threadCount = threadOptions[threadsBar.Value];
+            threadsLabel.Text = $"Threads: {threadCount}";
+        }
+        // Track CheckedChanged radio button event.
+        // Sets active lib on ASM
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.activeLib = "ASM";
+        }
+        // Track CheckedChanged radio button event.
+        // Sets active lib on C++
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.activeLib = "CPP";
+        }
+    }
+}
