@@ -26,8 +26,15 @@ namespace JaProj.Processing
             // Copy modified pixel data back to the bitmap
             Marshal.Copy(rgbValues, 0, bmpData.Scan0, bytes);
             bitmap.UnlockBits(bmpData);
+
+
+
             // Update the PictureBox with the modified image
             pictureBox.Image = bitmap;
+
+
+            string outputPath = @"C:\Users\jakub\JA-Project\JaProj\test1.jpg";
+            bitmap.Save(outputPath, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
     }
 }

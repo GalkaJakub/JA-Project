@@ -1,11 +1,12 @@
-﻿// Version 0.2
+﻿// Version 0.3
 
 // Update:
-//Better code organization
-//Added selection of number of threads
-//Added detects and defaults the number of threads
-//Added selection of active lib (C++ or ASM)
-//Added prototype of c++ function for image sharpening (requires improvements and multi-threading)
+//Added prototype of asm lib
+//Improve c++ lib
+//Added convert bitmap to Format24bppRgb (if requires)
+
+
+
 
 using System;
 using System.Collections.Generic;

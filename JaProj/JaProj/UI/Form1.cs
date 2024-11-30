@@ -1,11 +1,9 @@
-﻿// Version 0.2
+﻿// Version 0.3
 
 // Update:
-//Better code organization
-//Added selection of number of threads
-//Added detects and defaults the number of threads
-//Added selection of active lib (C++ or ASM)
-//Added prototype of c++ function for image sharpening (requires improvements and multi-threading)
+//Added prototype of asm lib
+//Improve c++ lib
+//Added convert bitmap to Format24bppRgb (if requires)
 
 using JaProj.Processing;
 using System;
@@ -14,6 +12,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -103,6 +102,16 @@ namespace JaProj
         {
             if (currentBitmap != null)
             {
+                if (currentBitmap.PixelFormat != PixelFormat.Format24bppRgb)
+                {
+                    Bitmap newBitmap = new Bitmap(currentBitmap.Width, currentBitmap.Height, PixelFormat.Format24bppRgb);
+                    using (Graphics g = Graphics.FromImage(newBitmap))
+                    {
+                        g.DrawImage(currentBitmap, new Rectangle(0, 0, newBitmap.Width, newBitmap.Height));
+                    }
+                    currentBitmap = newBitmap;
+                }
+
                 if (activeLib == "CPP")
                 {
                     {

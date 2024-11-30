@@ -145,7 +145,7 @@ namespace JaProj
             this.threadsBar.Location = new System.Drawing.Point(50, 179);
             this.threadsBar.Maximum = 6;
             this.threadsBar.Name = "threadsBar";
-            this.threadsBar.Size = new System.Drawing.Size(198, 45);
+            this.threadsBar.Size = new System.Drawing.Size(198, 69);
             this.threadsBar.TabIndex = 9;
             this.threadsBar.ValueChanged += new System.EventHandler(this.threadsBar_ValueChanged);
             // 
@@ -163,9 +163,8 @@ namespace JaProj
             this.radioButton_ASM.AutoSize = true;
             this.radioButton_ASM.Location = new System.Drawing.Point(122, 274);
             this.radioButton_ASM.Name = "radioButton_ASM";
-            this.radioButton_ASM.Size = new System.Drawing.Size(62, 24);
+            this.radioButton_ASM.Size = new System.Drawing.Size(69, 24);
             this.radioButton_ASM.TabIndex = 11;
-            this.radioButton_ASM.TabStop = true;
             this.radioButton_ASM.Text = "ASM";
             this.radioButton_ASM.UseVisualStyleBackColor = true;
             this.radioButton_ASM.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -175,9 +174,8 @@ namespace JaProj
             this.radioButton_Cpp.AutoSize = true;
             this.radioButton_Cpp.Location = new System.Drawing.Point(122, 304);
             this.radioButton_Cpp.Name = "radioButton_Cpp";
-            this.radioButton_Cpp.Size = new System.Drawing.Size(56, 24);
+            this.radioButton_Cpp.Size = new System.Drawing.Size(63, 24);
             this.radioButton_Cpp.TabIndex = 12;
-            this.radioButton_Cpp.TabStop = true;
             this.radioButton_Cpp.Text = "C++";
             this.radioButton_Cpp.UseVisualStyleBackColor = true;
             this.radioButton_Cpp.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
