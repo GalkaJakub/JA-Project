@@ -13,6 +13,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -53,6 +54,9 @@ namespace JaProj
             {
                 openFileDialog.Filter = "Images (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
                 openFileDialog.Title = "Select an Image";
+                string executablePath = AppDomain.CurrentDomain.BaseDirectory;
+                string folderPath = Path.GetFullPath(Path.Combine(executablePath, "../../../Images"));
+                openFileDialog.InitialDirectory = folderPath;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {

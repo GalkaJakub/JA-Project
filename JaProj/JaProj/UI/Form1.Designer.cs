@@ -54,7 +54,7 @@ namespace JaProj
             // 
             // btnLoadImage
             // 
-            this.btnLoadImage.Location = new System.Drawing.Point(77, 22);
+            this.btnLoadImage.Location = new System.Drawing.Point(39, 22);
             this.btnLoadImage.Name = "btnLoadImage";
             this.btnLoadImage.Size = new System.Drawing.Size(131, 26);
             this.btnLoadImage.TabIndex = 0;
@@ -64,16 +64,16 @@ namespace JaProj
             // 
             // pictureBoxO
             // 
-            this.pictureBoxO.Location = new System.Drawing.Point(309, 12);
+            this.pictureBoxO.Location = new System.Drawing.Point(216, 12);
             this.pictureBoxO.Name = "pictureBoxO";
-            this.pictureBoxO.Size = new System.Drawing.Size(500, 350);
+            this.pictureBoxO.Size = new System.Drawing.Size(827, 539);
             this.pictureBoxO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxO.TabIndex = 1;
             this.pictureBoxO.TabStop = false;
             // 
             // btnProces
             // 
-            this.btnProces.Location = new System.Drawing.Point(77, 64);
+            this.btnProces.Location = new System.Drawing.Point(39, 64);
             this.btnProces.Name = "btnProces";
             this.btnProces.Size = new System.Drawing.Size(131, 28);
             this.btnProces.TabIndex = 2;
@@ -83,7 +83,7 @@ namespace JaProj
             // 
             // pictureBoxRed
             // 
-            this.pictureBoxRed.Location = new System.Drawing.Point(871, 64);
+            this.pictureBoxRed.Location = new System.Drawing.Point(515, 580);
             this.pictureBoxRed.Name = "pictureBoxRed";
             this.pictureBoxRed.Size = new System.Drawing.Size(110, 96);
             this.pictureBoxRed.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -92,7 +92,7 @@ namespace JaProj
             // 
             // pictureBoxGreen
             // 
-            this.pictureBoxGreen.Location = new System.Drawing.Point(871, 193);
+            this.pictureBoxGreen.Location = new System.Drawing.Point(515, 709);
             this.pictureBoxGreen.Name = "pictureBoxGreen";
             this.pictureBoxGreen.Size = new System.Drawing.Size(110, 96);
             this.pictureBoxGreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -101,7 +101,7 @@ namespace JaProj
             // 
             // pictureBoxBlue
             // 
-            this.pictureBoxBlue.Location = new System.Drawing.Point(1023, 64);
+            this.pictureBoxBlue.Location = new System.Drawing.Point(671, 580);
             this.pictureBoxBlue.Name = "pictureBoxBlue";
             this.pictureBoxBlue.Size = new System.Drawing.Size(110, 96);
             this.pictureBoxBlue.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,7 +110,7 @@ namespace JaProj
             // 
             // pictureBoxLuma
             // 
-            this.pictureBoxLuma.Location = new System.Drawing.Point(1023, 193);
+            this.pictureBoxLuma.Location = new System.Drawing.Point(671, 709);
             this.pictureBoxLuma.Name = "pictureBoxLuma";
             this.pictureBoxLuma.Size = new System.Drawing.Size(110, 96);
             this.pictureBoxLuma.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -119,16 +119,16 @@ namespace JaProj
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(309, 368);
+            this.pictureBox1.Location = new System.Drawing.Point(1065, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(500, 350);
+            this.pictureBox1.Size = new System.Drawing.Size(827, 539);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(77, 108);
+            this.button1.Location = new System.Drawing.Point(39, 108);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 28);
             this.button1.TabIndex = 8;
@@ -142,17 +142,17 @@ namespace JaProj
             this.threadsBar.AccessibleName = "";
             this.threadsBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.threadsBar.LargeChange = 1;
-            this.threadsBar.Location = new System.Drawing.Point(50, 179);
+            this.threadsBar.Location = new System.Drawing.Point(12, 179);
             this.threadsBar.Maximum = 6;
             this.threadsBar.Name = "threadsBar";
-            this.threadsBar.Size = new System.Drawing.Size(198, 69);
+            this.threadsBar.Size = new System.Drawing.Size(198, 45);
             this.threadsBar.TabIndex = 9;
             this.threadsBar.ValueChanged += new System.EventHandler(this.threadsBar_ValueChanged);
             // 
             // threadsLabel
             // 
             this.threadsLabel.AutoSize = true;
-            this.threadsLabel.Location = new System.Drawing.Point(118, 228);
+            this.threadsLabel.Location = new System.Drawing.Point(80, 228);
             this.threadsLabel.Name = "threadsLabel";
             this.threadsLabel.Size = new System.Drawing.Size(51, 20);
             this.threadsLabel.TabIndex = 10;
@@ -161,9 +161,9 @@ namespace JaProj
             // radioButton_ASM
             // 
             this.radioButton_ASM.AutoSize = true;
-            this.radioButton_ASM.Location = new System.Drawing.Point(122, 274);
+            this.radioButton_ASM.Location = new System.Drawing.Point(77, 272);
             this.radioButton_ASM.Name = "radioButton_ASM";
-            this.radioButton_ASM.Size = new System.Drawing.Size(69, 24);
+            this.radioButton_ASM.Size = new System.Drawing.Size(62, 24);
             this.radioButton_ASM.TabIndex = 11;
             this.radioButton_ASM.Text = "ASM";
             this.radioButton_ASM.UseVisualStyleBackColor = true;
@@ -172,9 +172,9 @@ namespace JaProj
             // radioButton_Cpp
             // 
             this.radioButton_Cpp.AutoSize = true;
-            this.radioButton_Cpp.Location = new System.Drawing.Point(122, 304);
+            this.radioButton_Cpp.Location = new System.Drawing.Point(77, 302);
             this.radioButton_Cpp.Name = "radioButton_Cpp";
-            this.radioButton_Cpp.Size = new System.Drawing.Size(63, 24);
+            this.radioButton_Cpp.Size = new System.Drawing.Size(56, 24);
             this.radioButton_Cpp.TabIndex = 12;
             this.radioButton_Cpp.Text = "C++";
             this.radioButton_Cpp.UseVisualStyleBackColor = true;
@@ -182,7 +182,7 @@ namespace JaProj
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1309, 720);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.radioButton_Cpp);
             this.Controls.Add(this.radioButton_ASM);
             this.Controls.Add(this.threadsLabel);

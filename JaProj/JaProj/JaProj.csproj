@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Processing\ASMSharpen.cs" />
     <Compile Include="Processing\CppSharpen.cs" />
     <Compile Include="Processing\Histogram.cs" />
     <Compile Include="UI\Form1.cs">
@@ -105,6 +106,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\" />
     <Folder Include="Results\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

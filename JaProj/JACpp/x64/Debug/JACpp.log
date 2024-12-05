@@ -1,11 +1,2 @@
 ﻿  Sharpening.cpp
-C:\Users\jakub\JA-Project\JaProj\JACpp\Sharpening.cpp(36,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  (compiling source file '/Sharpening.cpp')
-  
-C:\Users\jakub\JA-Project\JaProj\JACpp\Sharpening.cpp(40,29): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  (compiling source file '/Sharpening.cpp')
-  
-C:\Users\jakub\JA-Project\JaProj\JACpp\Sharpening.cpp(44,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  (compiling source file '/Sharpening.cpp')
-  
   JACpp.vcxproj -> C:\Users\jakub\JA-Project\JaProj\x64\Debug\JACpp.dll

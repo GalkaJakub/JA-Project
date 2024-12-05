@@ -1,6 +1,8 @@
+; Makro do przetwarzania jednego piksela dla algorytmu wyostrzania
 filterPixel macro
-;Here will be code for sharpening every pixel
- endm
+
+endm
+
 
 .code
 ; ASMSharpen(unsigned char output[] - RSI, unsigned char input[] - RDI, int imageWidth - R8, int pixelIndex - R9, short int sharpenMask[] - RSP+40)

@@ -1,60 +1,60 @@
 #include "pch.h"
 #include "Sharpening.h"
-#include <iostream>
-#include <fstream>
+#include <algorithm>
 
-// Function for image sharpening
-void ImageSharpening(unsigned char* data, int width, int height, int stride)
+
+// Function to apply a sharpening filter to a single pixel channel
+void ApplyFilter(BYTE* data, BYTE* outData, int stride, int x, int y)
 {
+    // Calculate the index of the current pixel channel in the data array
+    int index = y * stride + x;
+    int result = 0;
 
-    float sharpeningFactor = 1;
     // 3x3 sharpening mask
-    int mask[3][3] =
+    static const int mask[3][3] =
     {
         { 0, -1, 0 },
         { -1, 5, -1 },
         { 0, -1, 0 }
     };
 
-    unsigned char* tempData;
-    if (stride < 0) {
-        tempData = new unsigned char[height * -stride];
-        data = data + (height - 1) * stride;
+    // Iterate over the 3x3 neighborhood of the current pixel
+    for (int i = -1; i <= 1; ++i)
+    {
+        for (int j = -1; j <= 1; ++j)
+        {
+            // Calculate the index of the neighboring pixel channel
+            int currentIndex = index + (i * stride) + (j * 3);
+
+            //use the sharpening mask and sum
+            result += data[currentIndex] * mask[i + 1][j + 1];
+        }
     }
-    else {
-        tempData = new unsigned char[height * stride];
-    }
+
+    // Clamp the result to range [0, 255]
+    result = std::clamp(result, 0, 255);
+    // Add the result to the output data array
+    outData[index] = result;
+}
+
+// Function for image sharpening
+void ImageSharpening(BYTE* data, int width, int height, int stride)
+{
+    // Allocate memory for the temporary buffer
+    BYTE* tempData = new BYTE[height * stride];
+
+    // Copy the original image data into the temporary buffer
     memcpy(tempData, data, height * stride);
 
     // Loop through each pixel, excluding the border pixels
     for (int y = 1; y < height - 1; ++y) {
-        unsigned char* row = data + y * stride;
-        unsigned char* nextRow = data + (y + 1) * stride;
-        unsigned char* prevRow = data + (y - 1) * stride;
-        unsigned char* resultRow = tempData + y * stride;
         for (int x = 3; x < (width - 1) * 3; x += 3) {
-            int resultRed = sharpeningFactor * (row[x] * mask[1][1] + prevRow[x - 3] * mask[0][0] + prevRow[x] * mask[0][1] + prevRow[x + 3] * mask[0][2] +
-                row[x - 3] * mask[1][0] + row[x + 3] * mask[1][2] +
-                nextRow[x - 3] * mask[2][0] + nextRow[x] * mask[2][1] + nextRow[x + 3] * mask[2][2]);
-
-            int resultGreen = sharpeningFactor * (row[x + 1] * mask[1][1] + prevRow[x - 2] * mask[0][0] + prevRow[x + 1] * mask[0][1] + prevRow[x + 4] * mask[0][2] +
-                row[x - 2] * mask[1][0] + row[x + 4] * mask[1][2] +
-                nextRow[x - 2] * mask[2][0] + nextRow[x + 1] * mask[2][1] + nextRow[x + 4] * mask[2][2]);
-
-            int resultBlue = sharpeningFactor * (row[x + 2] * mask[1][1] + prevRow[x - 1] * mask[0][0] + prevRow[x + 2] * mask[0][1] + prevRow[x + 5] * mask[0][2] +
-                row[x - 1] * mask[1][0] + row[x + 5] * mask[1][2] +
-                nextRow[x - 1] * mask[2][0] + nextRow[x + 2] * mask[2][1] + nextRow[x + 5] * mask[2][2]);
-
-            // Function to clamp pixel values to the range [0, 255]
-            auto clamp = [](int value) {
-                return (value < 0) ? 0 : (value > 255 ? 255 : value);
-                };
-
-            // Assign the new clamped pixel values to the corresponding channels
-            resultRow[x] = clamp(resultRed);
-            resultRow[x + 1] = clamp(resultGreen);
-            resultRow[x + 2] = clamp(resultBlue);
-
+            for (int c = 0; c < 3; c++)
+            {
+                int currentX = x + c;
+                // Apply the sharpening filter to the current pixel channel
+                ApplyFilter(data, tempData, stride, currentX, y);
+            }
         }
     }
 
