@@ -1,9 +1,8 @@
-﻿// Version 0.3
+﻿// Version 0.4
 
 // Update:
-//Added prototype of asm lib
-//Improve c++ lib
-//Added convert bitmap to Format24bppRgb (if requires)
+//Added multithreading support to the C++ library.
+
 
 using JaProj.Processing;
 using System;
@@ -118,14 +117,13 @@ namespace JaProj
 
                 if (activeLib == "CPP")
                 {
-                    {
-                        CppSharpening processor = new CppSharpening();
-                        processor.sharpenByCpp(currentBitmap, pictureBox1, threadCount);
-                    }
+                    CppSharpening processor = new CppSharpening();
+                    processor.sharpenByCpp(currentBitmap, pictureBox1, threadCount);
                 }
                 else if (activeLib == "ASM")
                 {
-                    //code for ASM lib
+                    ASMSharpening processor = new ASMSharpening();
+                    processor.sharpenByASM(currentBitmap, pictureBox1, threadCount);
                 }
                 else
                 {

@@ -1,0 +1,9 @@
+﻿  pch.cpp
+  dllmain.cpp
+  Sharpening.cpp
+     Creating library C:\Users\jakub\JA-Project\JaProj\x64\Release\JACpp.lib and object C:\Users\jakub\JA-Project\JaProj\x64\Release\JACpp.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 6 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  JACpp.vcxproj -> C:\Users\jakub\JA-Project\JaProj\x64\Release\JACpp.dll

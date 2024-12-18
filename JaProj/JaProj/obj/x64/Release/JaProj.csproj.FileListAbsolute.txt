@@ -1,0 +1,10 @@
+C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Release\JaProj.exe.config
+C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Release\JaProj.exe
+C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Release\JaProj.pdb
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.csproj.AssemblyReference.cache
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.Form1.resources
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.Properties.Resources.resources
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.csproj.GenerateResource.cache
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.csproj.CoreCompileInputs.cache
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.exe
+C:\Users\jakub\JA-Project\JaProj\JaProj\obj\x64\Release\JaProj.pdb
