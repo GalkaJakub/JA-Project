@@ -24,7 +24,7 @@ void ApplyFilter(BYTE* data, BYTE* outData, int stride, int x, int y)
         for (int j = -1; j <= 1; ++j)
         {
             // Calculate the index of the neighboring pixel channel
-            int currentIndex = index + (i * stride) + (j * 3);
+            int currentIndex = index + (i * stride) + (j * 4);
 
             //use the sharpening mask and sum
             result += data[currentIndex] * mask[i + 1][j + 1];
@@ -38,29 +38,17 @@ void ApplyFilter(BYTE* data, BYTE* outData, int stride, int x, int y)
 }
 
 // Function for image sharpening
-void ImageSharpening(BYTE* data, int width, int height, int stride)
+void ImageSharpening(BYTE* data, BYTE* outData, int width, int height, int stride)
 {
-    // Allocate memory for the temporary buffer
-    BYTE* tempData = new BYTE[height * stride];
-
-    // Copy the original image data into the temporary buffer
-    memcpy(tempData, data, height * stride);
-
     // Loop through each pixel, excluding the border pixels
     for (int y = 1; y < height - 1; ++y) {
-        for (int x = 3; x < (width - 1) * 3; x += 3) {
-            for (int c = 0; c < 3; c++)
+        for (int x = 4; x < (width - 1) * 4; x += 4) {
+            for (int c = 0; c < 4; c++)
             {
                 int currentX = x + c;
                 // Apply the sharpening filter to the current pixel channel
-                ApplyFilter(data, tempData, stride, currentX, y);
+                ApplyFilter(data, outData, stride, currentX, y);
             }
         }
     }
-
-    // Copy the result back to the original data array
-    memcpy(data, tempData, height * stride);
-
-    // Free temporary buffer
-    delete[] tempData;
 }

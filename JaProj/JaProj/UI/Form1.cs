@@ -1,7 +1,8 @@
-﻿// Version 0.4
+﻿// Version 0.5
 
 // Update:
-//Added multithreading support to the C++ library.
+// Fixing bugs
+// Improved asm library
 
 
 using JaProj.Processing;
@@ -33,6 +34,9 @@ namespace JaProj
         // Bitmap to store the currently loaded image
         private Bitmap currentBitmap;
         //
+
+        private Bitmap convertedBitmap;
+
         private string activeLib;
         // Constructor for the form, initializes the components
         public Form1()
@@ -84,18 +88,24 @@ namespace JaProj
         // Checks if an image is loaded, then calculates and displays the histograms for Red, Green, Blue, and Luma channels.
         private void btnProces_Click(object sender, EventArgs e)
         {
-            if (currentBitmap != null)
+            if (currentBitmap != null && convertedBitmap != null)
             {
-                Histogram histogram = new Histogram(currentBitmap);
-                histogram.printHis(pictureBoxRed, "r");
-                histogram.printHis(pictureBoxGreen, "g");
-                histogram.printHis(pictureBoxBlue, "b");
-                histogram.printHis(pictureBoxLuma, "l");
+                Histogram ogHistogram = new Histogram(currentBitmap);
+                ogHistogram.printHis(pictureBoxRed, "r");
+                ogHistogram.printHis(pictureBoxGreen, "g");
+                ogHistogram.printHis(pictureBoxBlue, "b");
+                ogHistogram.printHis(pictureBoxLuma, "l");
+
+                Histogram convertHistogram = new Histogram(convertedBitmap);
+                convertHistogram.printHis(pictureBoxRed2, "r");
+                convertHistogram.printHis(pictureBoxGreen2, "g");
+                convertHistogram.printHis(pictureBoxBlue2, "b");
+                convertHistogram.printHis(pictureBoxLuma2, "l");
             }
             else
             {
                 // Display an error message
-                MessageBox.Show("Load the image first.");
+                MessageBox.Show("First convert your image");
             }
         }
 
@@ -105,25 +115,15 @@ namespace JaProj
         {
             if (currentBitmap != null)
             {
-                if (currentBitmap.PixelFormat != PixelFormat.Format24bppRgb)
-                {
-                    Bitmap newBitmap = new Bitmap(currentBitmap.Width, currentBitmap.Height, PixelFormat.Format24bppRgb);
-                    using (Graphics g = Graphics.FromImage(newBitmap))
-                    {
-                        g.DrawImage(currentBitmap, new Rectangle(0, 0, newBitmap.Width, newBitmap.Height));
-                    }
-                    currentBitmap = newBitmap;
-                }
-
                 if (activeLib == "CPP")
                 {
                     CppSharpening processor = new CppSharpening();
-                    processor.sharpenByCpp(currentBitmap, pictureBox1, threadCount);
+                    processor.sharpenByCpp(currentBitmap, threadCount, pictureBox1);
                 }
                 else if (activeLib == "ASM")
                 {
                     ASMSharpening processor = new ASMSharpening();
-                    processor.sharpenByASM(currentBitmap, pictureBox1, threadCount);
+                    convertedBitmap = processor.sharpenByASM(currentBitmap, threadCount, pictureBox1);
                 }
                 else
                 {

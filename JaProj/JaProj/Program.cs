@@ -1,10 +1,8 @@
-﻿// Version 0.4
+﻿// Version 0.5
 
 // Update:
-//Added multithreading support to the C++ library.
-
-
-
+// Fixing bugs
+// Improved asm library
 
 using System;
 using System.Collections.Generic;
