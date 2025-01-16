@@ -1,8 +1,9 @@
-﻿// Version 0.5
+﻿// Version 0.7
 
 // Update:
 // Fixing bugs
-// Improved asm library
+// Added Progress bar
+// Improved historgrams
 
 using System;
 using System.Collections.Generic;

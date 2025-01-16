@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\jakub\JA-Project\JaProj\x64\Release\JACpp.dll</FullPath>
+      <FullPath>C:\Users\jakub\JA-Project\JaProj\JaProj\bin\x64\Release\libs\JACpp.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

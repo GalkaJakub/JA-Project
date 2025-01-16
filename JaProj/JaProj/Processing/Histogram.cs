@@ -49,49 +49,41 @@ namespace JaProj.Processing
                 }
             }
         }
-
-        //Renders the histogram data as a vertical bar chart in the specified PictureBox.
-        public void printHis(PictureBox pictureBox, string hisColor)
+        // Renders all histograms (RGB and luma) on a single image.
+        public void printHis(PictureBox pictureBox)
         {
             Bitmap histogramBit = new Bitmap(pictureBox.Width, pictureBox.Height);
-            int[] histogram;
-            Color color;
 
-            switch (hisColor)
-            {
-                case "r":
-                    histogram = redHis;
-                    color = Color.Red;
-                    break;
-                case "g":
-                    histogram = greenHis;
-                    color = Color.Green;
-                    break;
-                case "b":
-                    histogram = blueHis;
-                    color = Color.Blue;
-                    break;
-                case "l":
-                    histogram = lumaHis;
-                    color = Color.DarkGray;
-                    break;
-                default:
-                    throw new ArgumentException("wrong color");
-            }
+            // Determine maximum values across all histograms
+            int maxRed = redHis.Max();
+            int maxGreen = greenHis.Max();
+            int maxBlue = blueHis.Max();
+            int maxLuma = lumaHis.Max();
+            int globalMax = Math.Max(Math.Max(maxRed, maxGreen), Math.Max(maxBlue, maxLuma));
 
             using (Graphics g = Graphics.FromImage(histogramBit))
             {
                 g.Clear(Color.White);
-                int max = histogram.Max();
 
-                for (int i = 0; i < histogram.Length; i++)
+                for (int i = 0; i < 256; i++)
                 {
-                    int barHeight = (int)(((double)histogram[i] / max) * pictureBox.Height);
-                    g.DrawLine(new Pen(color), new Point(i, pictureBox.Height), new Point(i, pictureBox.Height - barHeight));
+                    // Calculate bar heights relative to the picture box height
+                    int redHeight = (int)(((double)redHis[i] / globalMax) * pictureBox.Height);
+                    int greenHeight = (int)(((double)greenHis[i] / globalMax) * pictureBox.Height);
+                    int blueHeight = (int)(((double)blueHis[i] / globalMax) * pictureBox.Height);
+                    int lumaHeight = (int)(((double)lumaHis[i] / globalMax) * pictureBox.Height);
+
+                    // Draw lines for each channel
+                    g.DrawLine(new Pen(Color.FromArgb(128, Color.DarkGray), 1.5f), new Point(i, pictureBox.Height), new Point(i, pictureBox.Height - lumaHeight));
+                    g.DrawLine(new Pen(Color.FromArgb(128, Color.Red), 1.5f), new Point(i, pictureBox.Height), new Point(i, pictureBox.Height - redHeight));
+                    g.DrawLine(new Pen(Color.FromArgb(128, Color.Green), 1.5f), new Point(i, pictureBox.Height), new Point(i, pictureBox.Height - greenHeight));
+                    g.DrawLine(new Pen(Color.FromArgb(128, Color.Blue), 1.5f), new Point(i, pictureBox.Height), new Point(i, pictureBox.Height - blueHeight));
                 }
             }
 
+            // Display the combined histogram in the PictureBox
             pictureBox.Image = histogramBit;
         }
+
     }
 }

@@ -1,8 +1,9 @@
-﻿// Version 0.5
+﻿// Version 0.7
 
 // Update:
 // Fixing bugs
-// Improved asm library
+// Added Progress bar
+// Improved historgrams
 
 
 using JaProj.Processing;
@@ -17,13 +18,21 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace JaProj
 {
-    //The `Form1` class represents the main window of the application.
+    //Lib to choose
+    public enum ProcessingLib
+    {
+        None,
+        ASM,
+        CPP
+    }
+    //The Form1 class represents the main window of the application.
     public partial class Form1 : Form
     {
 
@@ -33,11 +42,10 @@ namespace JaProj
         int[] threadOptions = { 1, 2, 4, 8, 16, 32, 64 };
         // Bitmap to store the currently loaded image
         private Bitmap currentBitmap;
-        //
-
+        // Bitmap after convert
         private Bitmap convertedBitmap;
 
-        private string activeLib;
+        private ProcessingLib activeLib = ProcessingLib.None;
         // Constructor for the form, initializes the components
         public Form1()
         {
@@ -46,6 +54,7 @@ namespace JaProj
             threadsLabel.Text = $"Threads: {threadCount}";
             int defaultIndex = Array.IndexOf(threadOptions, threadCount);
             threadsBar.Value = defaultIndex;
+            progressBar1.Visible = false;
         }
 
         //"Load Image" button click event.
@@ -91,16 +100,10 @@ namespace JaProj
             if (currentBitmap != null && convertedBitmap != null)
             {
                 Histogram ogHistogram = new Histogram(currentBitmap);
-                ogHistogram.printHis(pictureBoxRed, "r");
-                ogHistogram.printHis(pictureBoxGreen, "g");
-                ogHistogram.printHis(pictureBoxBlue, "b");
-                ogHistogram.printHis(pictureBoxLuma, "l");
+                ogHistogram.printHis(pictureBoxHis);
 
                 Histogram convertHistogram = new Histogram(convertedBitmap);
-                convertHistogram.printHis(pictureBoxRed2, "r");
-                convertHistogram.printHis(pictureBoxGreen2, "g");
-                convertHistogram.printHis(pictureBoxBlue2, "b");
-                convertHistogram.printHis(pictureBoxLuma2, "l");
+                convertHistogram.printHis(pictureBoxHisSharp);
             }
             else
             {
@@ -111,24 +114,35 @@ namespace JaProj
 
         // Button click event.
         // Checks if an image is loaded, then sharpen image using c++ lib
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             if (currentBitmap != null)
             {
-                if (activeLib == "CPP")
+                progressBar1.Visible = true;
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = threadCount;
+                progressBar1.Value = 0;
+                progressBar1.Step = 1;
+                progressBar1.Visible = true;
+                await Task.Run(() =>
                 {
-                    CppSharpening processor = new CppSharpening();
-                    processor.sharpenByCpp(currentBitmap, threadCount, pictureBox1);
-                }
-                else if (activeLib == "ASM")
-                {
-                    ASMSharpening processor = new ASMSharpening();
-                    convertedBitmap = processor.sharpenByASM(currentBitmap, threadCount, pictureBox1);
-                }
-                else
-                {
-                    MessageBox.Show("Select ASM or C++");
-                }
+
+                    if (activeLib == ProcessingLib.ASM)
+                    {
+                        ASMSharpening processor = new ASMSharpening();
+                        convertedBitmap = processor.sharpenByASM(currentBitmap, threadCount, pictureBox1, progressBar1);
+                    }
+                    else if (activeLib == ProcessingLib.CPP)
+                    {
+                        CppSharpening processor = new CppSharpening();
+                        convertedBitmap = processor.sharpenByCpp(currentBitmap, threadCount, pictureBox1, progressBar1);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select ASM or C++");
+                    }
+                });
+                progressBar1.Visible = false;
             }
             else
             {
@@ -147,13 +161,18 @@ namespace JaProj
         // Sets active lib on ASM
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            this.activeLib = "ASM";
+            activeLib = ProcessingLib.ASM;
         }
         // Track CheckedChanged radio button event.
         // Sets active lib on C++
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            this.activeLib = "CPP";
+            activeLib = ProcessingLib.CPP;
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

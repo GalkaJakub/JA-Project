@@ -3,10 +3,10 @@ c:\users\jakub\ja-project\japroj\jacpp\x64\release\vc143.pdb
 c:\users\jakub\ja-project\japroj\jacpp\x64\release\pch.obj
 c:\users\jakub\ja-project\japroj\jacpp\x64\release\sharpening.obj
 c:\users\jakub\ja-project\japroj\jacpp\x64\release\dllmain.obj
-c:\users\jakub\ja-project\japroj\x64\release\jacpp.dll
-c:\users\jakub\ja-project\japroj\x64\release\jacpp.pdb
-c:\users\jakub\ja-project\japroj\x64\release\jacpp.lib
-c:\users\jakub\ja-project\japroj\x64\release\jacpp.exp
+c:\users\jakub\ja-project\japroj\japroj\bin\x64\release\libs\jacpp.dll
+c:\users\jakub\ja-project\japroj\japroj\bin\x64\release\libs\jacpp.pdb
+c:\users\jakub\ja-project\japroj\japroj\bin\x64\release\libs\jacpp.lib
+c:\users\jakub\ja-project\japroj\japroj\bin\x64\release\libs\jacpp.exp
 c:\users\jakub\ja-project\japroj\jacpp\x64\release\jacpp.ipdb
 c:\users\jakub\ja-project\japroj\jacpp\x64\release\jacpp.iobj
 c:\users\jakub\ja-project\japroj\jacpp\x64\release\jacpp.tlog\cl.command.1.tlog

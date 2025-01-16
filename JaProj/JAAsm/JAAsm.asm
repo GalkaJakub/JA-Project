@@ -10,7 +10,7 @@ mask3x3 dw  0, -1, 0, -1, 5,  -1, 0, -1, 0
 ; Parameters:
 ;   offsetX, offsetY: offsets relative to the current pixel.
 ;   maskIdx: index in the mask3x3.
-;   xmm4: accumulator for the sum.
+;   mm7: accumulator for the sum.
 
 FilterNeighbor macro offsetX, offsetY, maskIdx
     ; calculate the offset address for pixel at (x+offsetX, y+offsetY)
@@ -24,28 +24,38 @@ FilterNeighbor macro offsetX, offsetY, maskIdx
     add rcx, rdx
     add rcx, rsi    ; rcx = base pointer + offset -> pointer to neighbor pixel
 
-    ; load 4 bytes from the neighbor pixel into xmm0
-    vmovd xmm0, dword ptr [rcx]
+    ; load 4 bytes from the neighbor pixel into mm0
+    movd mm0, dword ptr [rcx]
 
-    ; unpack the 4 bytes into 4 16-bit words
-    vpxor xmm15, xmm15, xmm15   ; zero xmm15 register
-    vpunpcklbw xmm0, xmm0, xmm15    ; unpack lower bytes of xmm0 with zeros
+    ; unpack the 4 bytes into 16-bit words
+    pxor mm6, mm6          ; mm6 = 0
+    punpcklbw mm0, mm6 
 
     ; load the mask value
     movsx rdx, word ptr [mask3x3 + maskIdx*2]
-    movd xmm1, rdx  ; move mask value into xmm1
-    ; duplicate the mask value across all words in xmm1
-    pshuflw   xmm1, xmm1, 0
-    pshufd    xmm1, xmm1, 0
+    movd mm1, rdx  ; move mask value into mm1
+    ; duplicate the mask value across all words in mm1
+    punpcklwd mm1, mm1
+    punpcklwd mm1, mm1
 
     ; multiply each component of the pixel by mask value
-    pmullw xmm0, xmm1
+    pmullw mm0, mm1
 
-    ; add values to accumulator xmm4
-    paddw xmm4, xmm0
+    ; add values to accumulator mm7
+    paddw mm7, mm0
 endm
 
 ASMSharpen PROC EXPORT
+
+    push rbx
+    push rbp
+    push rsi
+    push rdi
+    push r12
+    push r13
+    push r14
+    push r15
+
     ; parameters: RCX=inputData, RDX=outputData, R8=width, R9=height, [RSP+40]=stride
 
     mov rsi, rcx    ; rsi = inData
@@ -74,8 +84,8 @@ x_loop:
     cmp r8, r9
     jge next_y  ;if x >= width-1: go to next row
 
-    ; zero out the accumulator xmm4 for current pixel
-    vpxor xmm4, xmm4, xmm4
+    ; zero out the accumulator mm7 for current pixel
+    pxor mm7, mm7
 
     ; apply the 3x3 filter to the current pixel by processing each neighbor:
     FilterNeighbor -1, -1, 0
@@ -88,8 +98,8 @@ x_loop:
     FilterNeighbor  0,  1, 7
     FilterNeighbor  1,  1, 8
 
-    ; saturate and pack the 16-bit values in xmm4 back to 8-bit values
-    packuswb xmm4, xmm4
+    ; saturate and pack the 16-bit values in mm7 back to 8-bit values
+    packuswb mm7, mm7
 
     ; calculate output pixel address
     mov r9, rax
@@ -100,7 +110,7 @@ x_loop:
     add r9, rdi     ; r9 = output base pointer + offset -> pointer to output pixel
 
     ; save the processed pixel value (4 bytes) to the output image
-    vmovd dword ptr [r9], xmm4
+    movd dword ptr [r9], mm7
 
     ; increment x
     inc r8
@@ -117,6 +127,16 @@ inc_y:
     jmp y_loop
 
 end_proc:
+    pop r15
+    pop r14
+    pop r13
+    pop r12
+    pop rdi
+    pop rsi
+    pop rbp
+    pop rbx
+
+    emms
     ret
 
 ASMSharpen ENDP

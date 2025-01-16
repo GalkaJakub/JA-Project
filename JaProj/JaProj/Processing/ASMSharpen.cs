@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -11,12 +12,13 @@ namespace JaProj.Processing
     public class ASMSharpening
     {
         // Import the ASM function from the DLL
-        [DllImport(@"C:\Users\jakub\JA-Project\JaProj\x64\Debug\JAAsm.dll")]
+        [DllImport("libs/JAAsm.dll")]
         static extern void ASMSharpen(byte[] data, byte[] outData, int width, int height, int stride);
 
         // Method to sharpen an image using the ASM DLL function in multiple threads
-        public Bitmap sharpenByASM(Bitmap loadedBitmap, int threadCount, PictureBox pictureBox)
+        public Bitmap sharpenByASM(Bitmap loadedBitmap, int threadCount, PictureBox pictureBox, ProgressBar progressBar)
         {
+
             // Create a copy of the loaded image
             Bitmap bitmap = new Bitmap(loadedBitmap);
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
@@ -39,11 +41,7 @@ namespace JaProj.Processing
 
             // Determine how many rows each thread should process
             int rowsPerThread = height / threadCount;
-            int remainder = height % threadCount;
             Thread[] threads = new Thread[threadCount];
-
-            // Show the number of threadss
-            MessageBox.Show($"ASM \nThreads: {threads.Length.ToString()}");
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
@@ -79,7 +77,17 @@ namespace JaProj.Processing
                     int outCopyOffset = (startRow - localStart) * stride;
                     int outCopySize = usedHeight * stride;
                     // Copy processed data from local output buffer back to main data array
-                    Buffer.BlockCopy(localOut, outCopyOffset, data, startRow * stride, outCopySize);
+                    Buffer.BlockCopy(localOut, outCopyOffset, outData, startRow * stride, outCopySize);
+
+                    // Update progress bar
+                    if (progressBar.InvokeRequired)
+                    {
+                        progressBar.Invoke((MethodInvoker)(() => progressBar.PerformStep()));
+                    }
+                    else
+                    {
+                        progressBar.PerformStep();
+                    }
                 });
                 // Start the thread
                 threads[t].Start();
@@ -93,6 +101,9 @@ namespace JaProj.Processing
 
             timer.Stop();
 
+            // Copy processed global `outData` back to `data`
+            Buffer.BlockCopy(outData, 0, data, 0, data.Length);
+
             // Restore the saved edges
             RestoreEdges(data, width, height, stride, pixelSize, topRow, bottomRow, leftColumn, rightColumn);
 
@@ -100,14 +111,34 @@ namespace JaProj.Processing
             Marshal.Copy(data, 0, bmpData.Scan0, bytes);
             bitmap.UnlockBits(bmpData);
 
-            // Update the PictureBox with the modified image
-            pictureBox.Image = bitmap;
-            // Show time
-            MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms");
+            // Set new pictureBox
+            if (pictureBox.InvokeRequired)
+            {
+                pictureBox.Invoke((MethodInvoker)(() => pictureBox.Image = bitmap));
+            }
+            else
+            {
+                pictureBox.Image = bitmap;
+            }
 
-            // Save the file
-            string outputPath = @"C:\Users\jakub\JA-Project\JaProj\test_asm.jpg";
-            bitmap.Save(outputPath, ImageFormat.Jpeg);
+            // Show info
+            if (pictureBox.InvokeRequired)
+            {
+                pictureBox.Invoke((MethodInvoker)(() =>
+                    MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}")));
+            }
+            else
+            {
+                MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}");
+            }
+
+            // Save the file with curren
+            DateTime now = DateTime.Now;
+            string date = now.ToString("dd-MM HH-mm-s");
+
+            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
+            string folderPath = Path.GetFullPath(Path.Combine(executablePath, $"../../../Results/asm {date}.bmp"));
+            bitmap.Save(folderPath, ImageFormat.Bmp);
 
             return bitmap;
         }
