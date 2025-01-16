@@ -1,9 +1,8 @@
-﻿// Version 0.7
+﻿// Version 0.8
 
 // Update:
-// Fixing bugs
-// Added Progress bar
-// Improved historgrams
+// Added the ability to select any number of threads in the range 1-64
+
 
 using System;
 using System.Collections.Generic;

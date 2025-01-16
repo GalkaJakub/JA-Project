@@ -36,17 +36,19 @@ namespace JaProj
             this.pictureBoxHis = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.threadsBar = new System.Windows.Forms.TrackBar();
             this.threadsLabel = new System.Windows.Forms.Label();
             this.radioButton_ASM = new System.Windows.Forms.RadioButton();
             this.radioButton_Cpp = new System.Windows.Forms.RadioButton();
             this.pictureBoxHisSharp = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.threadsBar = new System.Windows.Forms.TrackBar();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHis)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.threadsBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHisSharp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.threadsBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLoadImage
@@ -106,23 +108,10 @@ namespace JaProj
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // threadsBar
-            // 
-            this.threadsBar.AccessibleDescription = "";
-            this.threadsBar.AccessibleName = "";
-            this.threadsBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.threadsBar.LargeChange = 1;
-            this.threadsBar.Location = new System.Drawing.Point(12, 126);
-            this.threadsBar.Maximum = 6;
-            this.threadsBar.Name = "threadsBar";
-            this.threadsBar.Size = new System.Drawing.Size(198, 69);
-            this.threadsBar.TabIndex = 9;
-            this.threadsBar.ValueChanged += new System.EventHandler(this.threadsBar_ValueChanged);
-            // 
             // threadsLabel
             // 
             this.threadsLabel.AutoSize = true;
-            this.threadsLabel.Location = new System.Drawing.Point(80, 175);
+            this.threadsLabel.Location = new System.Drawing.Point(51, 175);
             this.threadsLabel.Name = "threadsLabel";
             this.threadsLabel.Size = new System.Drawing.Size(51, 20);
             this.threadsLabel.TabIndex = 10;
@@ -166,9 +155,46 @@ namespace JaProj
             this.progressBar1.Size = new System.Drawing.Size(154, 38);
             this.progressBar1.TabIndex = 14;
             // 
+            // threadsBar
+            // 
+            this.threadsBar.AccessibleDescription = "";
+            this.threadsBar.AccessibleName = "";
+            this.threadsBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.threadsBar.LargeChange = 1;
+            this.threadsBar.Location = new System.Drawing.Point(12, 126);
+            this.threadsBar.Maximum = 6;
+            this.threadsBar.Name = "threadsBar";
+            this.threadsBar.Size = new System.Drawing.Size(198, 69);
+            this.threadsBar.TabIndex = 9;
+            this.threadsBar.ValueChanged += new System.EventHandler(this.threadsBar_ValueChanged);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(108, 173);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(61, 26);
+            this.numericUpDown1.TabIndex = 15;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1654, 688);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBoxHisSharp);
             this.Controls.Add(this.radioButton_Cpp);
@@ -186,8 +212,9 @@ namespace JaProj
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHis)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.threadsBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHisSharp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.threadsBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,11 +228,12 @@ namespace JaProj
         private System.Windows.Forms.PictureBox pictureBoxHis;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TrackBar threadsBar;
         private System.Windows.Forms.Label threadsLabel;
         private System.Windows.Forms.RadioButton radioButton_ASM;
         private System.Windows.Forms.RadioButton radioButton_Cpp;
         private System.Windows.Forms.PictureBox pictureBoxHisSharp;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TrackBar threadsBar;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

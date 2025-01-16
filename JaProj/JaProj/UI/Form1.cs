@@ -1,9 +1,8 @@
-﻿// Version 0.7
+﻿// Version 0.8
 
 // Update:
-// Fixing bugs
-// Added Progress bar
-// Improved historgrams
+// Added the ability to select any number of threads in the range 1-64
+
 
 
 using JaProj.Processing;
@@ -51,9 +50,10 @@ namespace JaProj
         {
             InitializeComponent();
             threadCount = Environment.ProcessorCount;
-            threadsLabel.Text = $"Threads: {threadCount}";
+            threadsLabel.Text = "Threads: ";
             int defaultIndex = Array.IndexOf(threadOptions, threadCount);
             threadsBar.Value = defaultIndex;
+            numericUpDown1.Value = threadCount;
             progressBar1.Visible = false;
         }
 
@@ -155,7 +155,7 @@ namespace JaProj
         private void threadsBar_ValueChanged(object sender, EventArgs e)
         {
             threadCount = threadOptions[threadsBar.Value];
-            threadsLabel.Text = $"Threads: {threadCount}";
+            numericUpDown1.Value = threadCount;
         }
         // Track CheckedChanged radio button event.
         // Sets active lib on ASM
@@ -163,7 +163,7 @@ namespace JaProj
         {
             activeLib = ProcessingLib.ASM;
         }
-        // Track CheckedChanged radio button event.
+        //Track CheckedChanged radio button event.
         // Sets active lib on C++
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
@@ -173,6 +173,11 @@ namespace JaProj
         private void progressBar1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            threadCount = (int)numericUpDown1.Value;
         }
     }
 }
