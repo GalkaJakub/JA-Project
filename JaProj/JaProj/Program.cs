@@ -1,7 +1,7 @@
-﻿// Version 0.8
+﻿// Version 0.9
 
 // Update:
-// Added the ability to select any number of threads in the range 1-64
+// Better comments for asm
 
 
 using System;

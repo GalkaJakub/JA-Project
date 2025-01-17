@@ -1,5 +1,11 @@
+; File: JAAsmSharpen.asm
+; Purpose: Sharpening an image using a 3x3 convolution mask.
+; Version 0.9
+; Update:
+; Better comments for asm
+
 .data
-; 3x3 sharpening mask matrix stored as 16-bit words. 
+; mask3x3: 3x3 sharpening mask matrix stored as 16-bit signed words 
     align 16
 mask3x3 dw  0, -1, 0, -1, 5,  -1, 0, -1, 0
 
@@ -7,10 +13,17 @@ mask3x3 dw  0, -1, 0, -1, 5,  -1, 0, -1, 0
 
 ; Makro: FilterNeighbor offsetX, offsetY, maskIndex
 ; macro processes a single neighboring pixel relative to the current pixel.
+;
 ; Parameters:
-;   offsetX, offsetY: offsets relative to the current pixel.
-;   maskIdx: index in the mask3x3.
-;   mm7: accumulator for the sum.
+;   offsetX  - horizontal offset from the current pixel, range: -1 to +1.
+;   offsetY  - vertical offset from the current pixel, range: -1 to +1.
+;   maskIdx  - index into the mask3x3 table, range: 0 to 8.
+;   mm7      - accumulator for sums of pixel components.
+;
+; Macro uses:
+;   rax, r8: to calculate offsets (x, y)
+;   rsi: base pointer for input data (inData)
+;   r13: stride (number of bytes in one row)
 
 FilterNeighbor macro offsetX, offsetY, maskIdx
     ; calculate the offset address for pixel at (x+offsetX, y+offsetY)
@@ -45,8 +58,35 @@ FilterNeighbor macro offsetX, offsetY, maskIdx
     paddw mm7, mm0
 endm
 
+
+; Procedure: ASMSharpen
+;
+;   For each pixel (x,y) apply the 3x3 sharpening filter by calculating weighted sum of its neighboring pixels. 
+;   Writes the new pixel value into outData.
+;   Borders are not processed.
+;
+; Parameters:
+;   RCX -> inData:  pointer to the input image bytes
+;       - must not be null
+;       - must point to at least (width * height * 4) bytes for a 32bpp image
+;   RDX -> outData: pointer to the output image bytes
+;       - must not be null
+;       - must be large enough to hold the result (width * height * 4)
+;   R8  -> width:   width of the image in pixels, range: >= 3
+;   R9  -> height:  height of the image in pixels, range >= 3
+;   [RSP+40] -> stride: number of bytes per image row, range >= (width * 4) 
+;
+; Returns:
+;   No return in registers. The output is written to outData.
+;
+; Registers/flags changed:
+;   - RAX, RBX, RCX, RDX, RSI, RDI, R12, R13, R14, R15 are modified.
+;   - MM registers: mm0, mm1, mm6, mm7
+;   - EFLAGS are affected by instructions (cmp, imul).
+
 ASMSharpen PROC EXPORT
 
+    ; preserve registers
     push rbx
     push rbp
     push rsi
@@ -56,8 +96,7 @@ ASMSharpen PROC EXPORT
     push r14
     push r15
 
-    ; parameters: RCX=inputData, RDX=outputData, R8=width, R9=height, [RSP+40]=stride
-
+    ; load parameters
     mov rsi, rcx    ; rsi = inData
     mov rdi, rdx    ; rdi = outData
     mov rbx, r8     ; rbx = width
@@ -101,7 +140,7 @@ x_loop:
     ; saturate and pack the 16-bit values in mm7 back to 8-bit values
     packuswb mm7, mm7
 
-    ; calculate output pixel address
+    ; calculate output pixel address: (y * stride + x * 4) + outData
     mov r9, rax
     imul r9, r13
     mov r10, r8
@@ -122,11 +161,12 @@ next_y:
     jmp y_loop
 
 inc_y:
-    ; if y >= height-1: increment y
+    ; if y >= height-1: increment y and continue
     inc rax
     jmp y_loop
 
 end_proc:
+    ; restore registers
     pop r15
     pop r14
     pop r13
@@ -136,7 +176,7 @@ end_proc:
     pop rbp
     pop rbx
 
-    emms
+    emms    ; clear MMX state
     ret
 
 ASMSharpen ENDP

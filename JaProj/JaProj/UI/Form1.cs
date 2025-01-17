@@ -1,9 +1,7 @@
-﻿// Version 0.8
+﻿// Version 0.9
 
 // Update:
-// Added the ability to select any number of threads in the range 1-64
-
-
+// Better comments for asm
 
 using JaProj.Processing;
 using System;
@@ -78,6 +76,11 @@ namespace JaProj
                         string filePath = openFileDialog.FileName;
                         currentBitmap = new Bitmap(filePath);
                         pictureBoxO.Image = currentBitmap;
+
+                        pictureBox1.Image = null;
+                        convertedBitmap = null;
+                        pictureBoxHis.Visible = false;
+                        pictureBoxHisSharp.Visible = false;
                     }
                     catch (Exception ex)
                     {
@@ -99,6 +102,8 @@ namespace JaProj
         {
             if (currentBitmap != null && convertedBitmap != null)
             {
+                pictureBoxHis.Visible = true;
+                pictureBoxHisSharp.Visible = true;
                 Histogram ogHistogram = new Histogram(currentBitmap);
                 ogHistogram.printHis(pictureBoxHis);
 
