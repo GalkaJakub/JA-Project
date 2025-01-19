@@ -65,7 +65,7 @@ namespace JaProj
             // 
             this.pictureBoxO.Location = new System.Drawing.Point(216, 12);
             this.pictureBoxO.Name = "pictureBoxO";
-            this.pictureBoxO.Size = new System.Drawing.Size(702, 480);
+            this.pictureBoxO.Size = new System.Drawing.Size(681, 450);
             this.pictureBoxO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxO.TabIndex = 1;
             this.pictureBoxO.TabStop = false;
@@ -82,7 +82,7 @@ namespace JaProj
             // 
             // pictureBoxHis
             // 
-            this.pictureBoxHis.Location = new System.Drawing.Point(419, 543);
+            this.pictureBoxHis.Location = new System.Drawing.Point(399, 524);
             this.pictureBoxHis.Name = "pictureBoxHis";
             this.pictureBoxHis.Size = new System.Drawing.Size(256, 121);
             this.pictureBoxHis.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -91,9 +91,9 @@ namespace JaProj
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(934, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(903, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(702, 480);
+            this.pictureBox1.Size = new System.Drawing.Size(681, 450);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -141,7 +141,7 @@ namespace JaProj
             // 
             // pictureBoxHisSharp
             // 
-            this.pictureBoxHisSharp.Location = new System.Drawing.Point(1155, 543);
+            this.pictureBoxHisSharp.Location = new System.Drawing.Point(1131, 524);
             this.pictureBoxHisSharp.Name = "pictureBoxHisSharp";
             this.pictureBoxHisSharp.Size = new System.Drawing.Size(256, 121);
             this.pictureBoxHisSharp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -150,7 +150,7 @@ namespace JaProj
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(849, 524);
+            this.progressBar1.Location = new System.Drawing.Point(823, 468);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(154, 38);
             this.progressBar1.TabIndex = 14;
@@ -193,7 +193,7 @@ namespace JaProj
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1654, 688);
+            this.ClientSize = new System.Drawing.Size(1598, 772);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBoxHisSharp);

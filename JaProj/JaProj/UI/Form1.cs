@@ -1,4 +1,4 @@
-﻿// Version 0.9
+﻿// Version 1.0
 
 // Update:
 // Better comments for asm
@@ -173,11 +173,6 @@ namespace JaProj
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             activeLib = ProcessingLib.CPP;
-        }
-
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

@@ -1,6 +1,4 @@
-; File: JAAsmSharpen.asm
-; Purpose: Sharpening an image using a 3x3 convolution mask.
-; Version 0.9
+; Version 1.0
 ; Update:
 ; Better comments for asm
 

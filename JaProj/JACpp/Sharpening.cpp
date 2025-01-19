@@ -1,3 +1,8 @@
+// Version 1.0
+
+// Update:
+// Better comments for asm
+
 #include "pch.h"
 #include "Sharpening.h"
 #include <algorithm>

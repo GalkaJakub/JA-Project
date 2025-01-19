@@ -125,14 +125,14 @@ namespace JaProj.Processing
             if (pictureBox.InvokeRequired)
             {
                 pictureBox.Invoke((MethodInvoker)(() =>
-                    MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}")));
+                    MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}\nImage saved in 'Results' folder")));
             }
             else
             {
-                MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}");
+                MessageBox.Show($"Execution time (asm): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}\nImage saved in 'Results' folder");
             }
 
-            // Save the file with curren
+            // Save the file with current date
             DateTime now = DateTime.Now;
             string date = now.ToString("dd-MM HH-mm-s");
 

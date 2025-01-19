@@ -123,11 +123,11 @@ namespace JaProj.Processing
             if (pictureBox.InvokeRequired)
             {
                 pictureBox.Invoke((MethodInvoker)(() =>
-                    MessageBox.Show($"Execution time (cpp): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}")));
+                    MessageBox.Show($"Execution time (cpp): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}\nImage saved in 'Results' folder")));
             }
             else
             {
-                MessageBox.Show($"Execution time (cpp): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}");
+                MessageBox.Show($"Execution time (cpp): {timer.ElapsedMilliseconds} ms\nThreads: {threadCount}\nImage saved in 'Results' folder");
             }
 
             // Save the file current date
