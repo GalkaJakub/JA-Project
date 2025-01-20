@@ -12,7 +12,7 @@ namespace JaProj.Processing
     public class ASMSharpening
     {
         // Import the ASM function from the DLL
-        [DllImport("libs/JAAsm.dll")]
+        [DllImport("JAAsm.dll")]
         static extern void ASMSharpen(byte[] data, byte[] outData, int width, int height, int stride);
 
         // Method to sharpen an image using the ASM DLL function in multiple threads
@@ -136,9 +136,7 @@ namespace JaProj.Processing
             DateTime now = DateTime.Now;
             string date = now.ToString("dd-MM HH-mm-s");
 
-            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
-            string folderPath = Path.GetFullPath(Path.Combine(executablePath, $"../../../Results/asm {date}.bmp"));
-            bitmap.Save(folderPath, ImageFormat.Bmp);
+            bitmap.Save($"Results/asm {date}.bmp", ImageFormat.Bmp);
 
             return bitmap;
         }

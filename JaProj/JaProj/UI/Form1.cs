@@ -64,9 +64,7 @@ namespace JaProj
             {
                 openFileDialog.Filter = "Images (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
                 openFileDialog.Title = "Select an Image";
-                string executablePath = AppDomain.CurrentDomain.BaseDirectory;
-                string folderPath = Path.GetFullPath(Path.Combine(executablePath, "../../../Images"));
-                openFileDialog.InitialDirectory = folderPath;
+                openFileDialog.InitialDirectory = "Images";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {

@@ -12,7 +12,7 @@ namespace JaProj.Processing
     public class CppSharpening
     {
         // Import the C++ function from the DLL
-        [DllImport("libs/JACpp.dll")]
+        [DllImport("JACpp.dll")]
         static extern void ImageSharpening(byte[] data, byte[] outData, int width, int height, int stride);
 
         // Method to sharpen an image using the C++ DLL function in multiple threads
@@ -134,9 +134,7 @@ namespace JaProj.Processing
             DateTime now = DateTime.Now;
             string date = now.ToString("dd-MM HH-mm-s");
 
-            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
-            string folderPath = Path.GetFullPath(Path.Combine(executablePath, $"../../../Results/cpp {date}.bmp"));
-            bitmap.Save(folderPath, ImageFormat.Bmp);
+            bitmap.Save($"Results/cpp {date}.bmp", ImageFormat.Bmp);
 
             return bitmap;
         }

@@ -71,10 +71,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\JaProj\bin\x64\$(Configuration)\libs</OutDir>
+    <OutDir>$(SolutionDir)\JaProj\bin\x64\$(Configuration)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\JaProj\bin\x64\$(Configuration)\libs</OutDir>
+    <OutDir>$(SolutionDir)\JaProj\bin\x64\$(Configuration)</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,7 +119,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <Optimization>Custom</Optimization>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,7 +139,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <Optimization>Custom</Optimization>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
